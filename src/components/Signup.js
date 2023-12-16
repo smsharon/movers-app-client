@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import './Signup.css';
 import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
+import { useNavigate } from 'react-router-dom';
 
 const SignupForm = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -33,7 +35,7 @@ const SignupForm = () => {
 
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:5000/signup', {
+      const response = await fetch('https://mover-server.onrender.com/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -43,6 +45,7 @@ const SignupForm = () => {
 
       if (response.ok) {
         setSuccessMessage('Signup successful');
+        navigate('/login')
         setError(null);
       } else {
         const errorData = await response.json();

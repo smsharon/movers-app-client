@@ -28,14 +28,14 @@ const Bookings = () => {
       const token = includeAccessToken();
       console.log('Access Token:', token);
 
-      const response = await fetch('/make_booking', {
+      const response = await fetch('https://mover-server.onrender.com/make_booking', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': token,
         },
         body: JSON.stringify({
-          movingDate: selectedDate,
+          movingDate: selectedDate.toISOString(),
         }),
       });
 

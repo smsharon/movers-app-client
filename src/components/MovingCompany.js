@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "./Company.css"
 
-const CompleteMovingCompanyProfile = () => {
+  const CompleteMovingCompanyProfile = () => {
+  const navigate = useNavigate();
   const [profileData, setProfileData] = useState({
     company_name: '',
     contact_person: '',
@@ -27,7 +29,7 @@ const CompleteMovingCompanyProfile = () => {
 
     try {
       setLoading(true);
-      const response = await fetch('/complete_moving_company_profile', {
+      const response = await fetch('https://mover-server.onrender.com/complete_moving_company_profile', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -39,6 +41,7 @@ const CompleteMovingCompanyProfile = () => {
       if (response.ok) {
         // Profile completion successful, you can redirect or show a success message
         console.log('Profile completed successfully');
+        navigate('/moving-company-dashboard')
       } else {
         const errorData = await response.json();
         setError(errorData.error || 'Profile completion failed');
